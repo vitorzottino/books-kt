@@ -1,6 +1,7 @@
 package com.github.vitorzottino.books
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -20,6 +21,7 @@ import com.github.vitorzottino.books.modelview.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory(
             (application as BookApplication).repository
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             val bookTitle = binding.editTextTitulo.text.toString()
             val bookAutor = binding.editTextAutor.text.toString()
             val bookUrl = binding.editTextUrl.text.toString()
-            if (bookTitle.isNotBlank() && bookAutor.isNotBlank()) {
+            if (bookTitle.isNotBlank() && bookAutor.isNotBlank() && bookUrl.isNotBlank()) {
                 mainViewModel.insert(
                     Book(
                         titulo = bookTitle, autor = bookAutor, urlImagem = bookUrl
@@ -50,16 +52,24 @@ class MainActivity : AppCompatActivity() {
                 binding.editTextAutor.text.clear()
                 binding.editTextUrl.text.clear()
                 binding.editTextTitulo.requestFocus()
+            } else {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Error")
+                builder.setMessage("Campos em branco")
+                builder.setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+
+                val dialog = builder.create()
+                dialog.show()
             }
         }
     }
 
     private fun setUpRecyclerView() {
-        val adapter = MainListAdapter(onEditClick = { book -> showEditDialog(book)
+        val adapter = MainListAdapter(onEditClick = { book ->
+            showEditDialog(book)
         }, onDeleteClick = { book -> mainViewModel.delete(book) })
         binding.recyclerViewBooks.adapter = adapter
         binding.recyclerViewBooks.layoutManager = LinearLayoutManager(this)
-        // Adicionar Divider
         val dividerItemDecoration = DividerItemDecoration(
             binding.recyclerViewBooks.context,
             (binding.recyclerViewBooks.layoutManager as LinearLayoutManager).orientation
@@ -92,7 +102,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpLogo() {
         Glide
             .with(this)
-            .load("https://static.vecteezy.com/system/resources/previews/006/404/900/original/board-game-logo-free-vector.jpg" )
-                    .into(binding.imageLogo)
+            .load("https://cdn-icons-png.flaticon.com/512/5078/5078755.png")
+            .into(binding.imageLogo)
     }
 }

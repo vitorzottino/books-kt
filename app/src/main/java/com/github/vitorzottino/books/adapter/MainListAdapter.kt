@@ -3,23 +3,25 @@ package com.github.vitorzottino.books.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.github.vitorzottino.books.MainActivity
 import com.github.vitorzottino.books.databinding.BookItemBinding
 import com.github.vitorzottino.books.entity.Book
 
 class MainListAdapter(
     private val onEditClick: (Book) -> Unit, private val onDeleteClick: (Book) -> Unit
-) : RecyclerView.Adapter<MainListAdapter.GameViewHolder>() {
+) : RecyclerView.Adapter<MainListAdapter.BookViewHolder>() {
     private var books: List<Book> = emptyList()
 
-    class GameViewHolder(val binding: BookItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class BookViewHolder(val binding: BookItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val binding =
             BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return GameViewHolder(binding)
+        return BookViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val currentBook = books[position]
         holder.binding.textViewTitulo.text = currentBook.titulo
         holder.binding.textViewAutor.text = currentBook.autor
@@ -29,6 +31,10 @@ class MainListAdapter(
         holder.binding.buttonDelete.setOnClickListener {
             onDeleteClick(currentBook)
         }
+
+        Glide.with(holder.itemView.context)
+            .load(currentBook.urlImagem)
+            .into(holder.binding.imageUrl)
     }
 
     override fun getItemCount() = books.size

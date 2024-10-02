@@ -1,48 +1,61 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width ="match_parent"
-    android:layout_height ="wrap_content"
-    android:orientation ="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="16dp">
+
+
     <TextView
         android:id="@+id/textViewTitulo"
-        android:layout_width ="0dp"
-        android:layout_height ="wrap_content"
-        android:layout_marginEnd ="16dp"
-        android:text="Titulo"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
         android:maxLines="1"
+        android:text="Titulo"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf ="@+id/buttonEdit"
-        app:layout_constraintStart_toStartOf ="parent"
-        app:layout_constraintTop_toTopOf ="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageUrl"
+        app:layout_constraintTop_toTopOf="@+id/imageUrl" />
+
     <TextView
         android:id="@+id/textViewAutor"
-        android:layout_width ="0dp"
-        android:layout_height ="wrap_content"
-        android:layout_marginTop ="8dp"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
         android:maxLines="3"
         android:text="Autor"
-        app:layout_constraintEnd_toEndOf ="@+id/textViewTitulo"
-        app:layout_constraintStart_toStartOf ="@+id/textViewTitulo"
-        app:layout_constraintTop_toBottomOf ="@+id/textViewTitulo" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageUrl"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitulo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
+
     <ImageView
         android:id="@+id/buttonEdit"
-        android:layout_width ="wrap_content"
-        android:layout_height ="wrap_content"
-        android:layout_marginEnd ="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/ic_edit"
-        app:layout_constraintBottom_toBottomOf ="@+id/buttonDelete"
-        app:layout_constraintEnd_toStartOf ="@+id/buttonDelete"
-        app:layout_constraintTop_toTopOf ="@+id/buttonDelete" />
+        app:layout_constraintBottom_toBottomOf="@+id/buttonDelete"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
+        app:layout_constraintStart_toEndOf="@+id/textViewTitulo"
+        app:layout_constraintTop_toTopOf="@+id/buttonDelete" />
+
     <ImageView
         android:id="@+id/buttonDelete"
-        android:layout_width ="wrap_content"
-        android:layout_height ="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_delete"
 
-        app:layout_constraintBottom_toBottomOf ="@+id/textViewAutor"
-        app:layout_constraintEnd_toEndOf ="parent"
-        app:layout_constraintTop_toTopOf ="@+id/textViewTitulo" />
-</androidx.constraintlayout.widget.ConstraintLayout >
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAutor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTitulo" />
+
+    <ImageView
+        android:id="@+id/imageUrl"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:layout_marginVertical="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
