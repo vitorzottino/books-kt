@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         builder.setView(dialogBinding.root)
         dialogBinding.editTextTitulo.setText(book.titulo)
         dialogBinding.editTextAutor.setText(book.autor)
-        builder.setTitle("Editar Jogo")
+        builder.setTitle("Editar Livro")
         builder.setPositiveButton("Salvar") { _, _ ->
             val updatedGame = book.copy(
                 titulo = dialogBinding.editTextTitulo.text.toString(),
